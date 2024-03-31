@@ -24,7 +24,8 @@
 
 #define DYNCRYPT_XOR_FUNC_SUFFIX        __fncx0r_pr0t
 #define DYNCRYPT_XOR_FUNC_END_SUFFIX    __endx0r_pr0t
-#define DYNCRYPT_XOR_SECTION            ".x0r_pr0t"
+#define DYNCRYPT_XOR_SECTION            ".x0r"
+#define DYNCRYPT_XOR_KEY                0x69
 
 #define DECL__XOR_PROTECTED_SUB_SUB(_ret,_func_name,_fnc,_end,...)                      \
     __attribute__((section(DYNCRYPT_XOR_SECTION))) _ret _func_name ##_fnc __VA_ARGS__   \
@@ -50,7 +51,7 @@ static inline
 __attribute__((always_inline))
 void dyncrypt__xor_from_to(unsigned char *from, unsigned int n) {
     for (unsigned int i = 0; i < n; i++) {
-        from[i] ^= 0x5A;
+        from[i] ^= DYNCRYPT_XOR_KEY;
     }
 }
 
