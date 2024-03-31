@@ -53,7 +53,7 @@ int main(int argc, char **argv) {
     Elf(Shdr)   *shdr       = (void*)(elf+ehdr->e_shoff);
     Elf(Phdr)   *phdr       = (void*)(elf+ehdr->e_phoff);
     Elf(Addr)   sec_vaddr   = (Elf(Addr))-1;
-    char        *sec_names  = elf+shdr[ehdr->e_shstrndx].sh_offset;
+    char        *sec_names  = (char *)(elf+shdr[ehdr->e_shstrndx].sh_offset);
 
     for (size_t i = 0; i < ehdr->e_shnum; i++) {
         if (strcmp(sec_names+shdr[i].sh_name,".x0r_pr0t") == 0) {
