@@ -27,6 +27,8 @@
 
 #include <elf.h>
 
+#include "include/xor_dyncrypted.h"
+
 #ifdef ELF64
 #define Elf(x) Elf64_##x
 #else
@@ -56,16 +58,16 @@ int main(int argc, char **argv) {
     char        *sec_names  = (char *)(elf+shdr[ehdr->e_shstrndx].sh_offset);
 
     for (size_t i = 0; i < ehdr->e_shnum; i++) {
-        if (strcmp(sec_names+shdr[i].sh_name,".x0r_pr0t") == 0) {
+        if (strcmp(sec_names+shdr[i].sh_name, DYNCRYPT_XOR_SECTION) == 0) {
             sec_vaddr = shdr[i].sh_addr;
             shdr[i].sh_flags |=SHF_WRITE;
             for (size_t y = 0; y < shdr[i].sh_size; y++) {
-                (elf+shdr[i].sh_offset)[y] ^= 0x5A;
+                (elf+shdr[i].sh_offset)[y] ^= DYNCRYPT_XOR_KEY;
             }
         }
     }
 
-    assert(sec_vaddr != (Elf(Addr))-1 && ".x0r_pr0t not found");
+    assert(sec_vaddr != (Elf(Addr))-1 && "xored section not found");
 
     int suc = 0;
     for (size_t i = 0; i < ehdr->e_phnum; i++) {
@@ -74,7 +76,7 @@ int main(int argc, char **argv) {
             suc = 1;
         }
     }
-    assert(suc && ".x0r_pr0t-related program header not found");
+    assert(suc && ".xored section related program header not found");
     
     fp = fopen(argv[2], "wb");
     assert(fp);
