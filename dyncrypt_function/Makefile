@@ -29,13 +29,13 @@ $(EXAMPLE32_TARGET): ${EXAMPLE32_OBJ} ${PATCHER32_TARGET}
 	${PATCHER32_TARGET} ${@}.tmp ${@}
 	chmod +x ${@}
 
-${PATCHER64_TARGET}: patcher.c
+${PATCHER64_TARGET}: elf_patcher.c
 	mkdir -p $(shell dirname $(PATCHER64_TARGET))
-	${CC64} ${CFLAGS} -DELF64 patcher.c -o $@
+	${CC64} ${CFLAGS} -DELF64 elf_patcher.c -o $@
 
-${PATCHER32_TARGET}: patcher.c
+${PATCHER32_TARGET}: elf_patcher.c
 	mkdir -p $(shell dirname $(PATCHER32_TARGET))
-	${CC32} ${CFLAGS} -DELF32 patcher.c -o $@
+	${CC32} ${CFLAGS} -DELF32 elf_patcher.c -o $@
 
 ${EXAMPLE64_BUILD}%.o: %.c
 	mkdir -p $(shell dirname $@)
