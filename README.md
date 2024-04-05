@@ -10,6 +10,7 @@ It is important to note that the code in this repository is not reliable for pro
 technique | short description
 -|-
 [dyncrypt_function](dyncrypt_function/) | decrypt / encrypt function at runtime
+[r_debug_hook](r_debug_hook/) | use _r_debug to hook process' imported function(s)
 
 ## Contribution Guidelines
 Contributions to Malggregate are welcome as long as they are relevant to the repository's focus.\
@@ -25,5 +26,6 @@ See the [LICENSE](LICENSE) file for more details.
 
 ## Disclaimer
 The code provided in this repository is for educational and research purposes only.\
-It is not intended for malicious use. Any actions taken with the code in this repository are solely the responsibility of the user.\
+It is not intended for malicious use.\
+Any actions taken with the code in this repository are solely the responsibility of the user.\
 The author(s) of Malggregate are not liable for any damages or legal consequences resulting from the use or misuse of the code.
